@@ -20,9 +20,9 @@ public static class DependencyInjection
         // se usa una versión MySQL 8 compatible como respaldo.
         var configuredVersion = configuration["Database:ServerVersion"];
         ServerVersion serverVersion;
-        if (!string.IsNullOrWhiteSpace(configuredVersion))
+        if (!string.IsNullOrWhiteSpace(configuredVersion) && Version.TryParse(configuredVersion, out var parsed))
         {
-            serverVersion = new MySqlServerVersion(Version.Parse(configuredVersion));
+            serverVersion = new MySqlServerVersion(parsed);
         }
         else
         {
